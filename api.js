@@ -97,7 +97,7 @@ router.route("/customers").get((request, response) => {
     })
 })
 
-var port = process.env.PORT || 8091;
+var port = process.env.PORT || 8090;
 app.listen(port);
 console.log(`running at port ${port}`)
 // const sslServer = https.createServer({
