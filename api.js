@@ -58,7 +58,7 @@ router.route("/sudox/:personID").get((request, response) => {
         response.json(result);
     })
 })
-router.route("/customers").get((request, response) => {
+router.route("/customerNoControl").get((request, response) => {
     dboperation.getCustomers().then(result => {
         response.json(result[0]);
     })
@@ -86,7 +86,18 @@ router.route("/CreateNewInteaction").post((request, response) => {
     })
 })
 
-var port = process.env.PORT || 8090;
+router.route("/agents").get((request, response) => {
+    dboperation.getAgents().then(result => {
+        response.json(result);
+    })
+})
+router.route("/customers").get((request, response) => {
+    dboperation.getAllCustomers().then(result => {
+        response.json(result);
+    })
+})
+
+var port = process.env.PORT || 8091;
 app.listen(port);
 console.log(`running at port ${port}`)
 // const sslServer = https.createServer({
