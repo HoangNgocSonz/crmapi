@@ -58,7 +58,7 @@ router.route("/sudox/:personID").get((request, response) => {
         response.json(result);
     })
 })
-router.route("/customers").get((request, response) => {
+router.route("/customerNoControl").get((request, response) => {
     dboperation.getCustomers().then(result => {
         response.json(result[0]);
     })
@@ -86,9 +86,26 @@ router.route("/CreateNewInteaction").post((request, response) => {
     })
 })
 
+router.route("/GetListAgents").get((request, response) => {
+    dboperation.getAgents().then(result => {
+        response.json(result[0]);
+    })
+})
+router.route("/customers").get((request, response) => {
+    dboperation.getAllCustomers().then(result => {
+        response.json(result);
+    })
+})
+router.route("/UpdateAgentStatusById/:agentId").get((request, response) => {
+    dboperation.updateStatusAgentById(request.params.agentId).then(result => {
+        response.json(result);
+    })
+})
+
 var port = process.env.PORT || 8090;
 app.listen(port);
 console.log(`running at port ${port}`)
+
 // const sslServer = https.createServer({
 //     key:fs.readFileSync(path.join(__dirname,'cert','key.pem')),
 //     cert:fs.readFileSync(path.join(__dirname,'cert','cert.pem'))

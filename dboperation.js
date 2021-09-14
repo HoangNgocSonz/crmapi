@@ -163,6 +163,45 @@ async function insertInteraction(interaction){
         console.log("mm"+ error);
     }
 }
+
+
+async function getAgents(){
+    try{
+        let pool = await sql.connect(config);
+        let customer = await pool.request().query("select * from AppAgentSelecteds")
+        // .execute('getAppAgentSelecteds')
+        return customer.recordsets;
+    }
+    catch (error){
+        console.log("mm"+ error);
+    }
+}
+
+async function getAllCustomers(){
+    try{
+        let pool = await sql.connect(config);
+        let customer = await pool.request()
+        .execute('getAllCustomer')
+        return customer.recordsets;
+    }
+    catch (error){
+        console.log("mm"+ error);
+    }
+}
+
+async function updateStatusAgentById(agentId){
+    try{
+        let pool = await sql.connect(config);
+        let customer = await pool.request()
+        .input('id',sql.UniqueIdentifier, agentId)
+        .execute('updateStatusAgentById')
+        return customer.recordsets;
+    }
+    catch (error){
+        console.log("mm"+ error);
+    }
+}
+
 module.exports={
     getOrders:getOrders,
 
@@ -172,5 +211,8 @@ module.exports={
 
     simpleReturnCusorUseID:simpleReturnCusorUseID,
     insertCustomer:insertCustomer,
-    insertInteraction:insertInteraction
+    insertInteraction:insertInteraction,
+    getAgents:getAgents,
+    getAllCustomers:getAllCustomers,
+    updateStatusAgentById:updateStatusAgentById
 }
