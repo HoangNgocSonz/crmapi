@@ -70,7 +70,7 @@ async function insertCustomer(customer){
     try{
         let pool = await sql.connect(config);
         let insertProducts = await pool.request()
-        .input('id',sql.UniqueIdentifier,customer.id)
+        // .input('id',sql.UniqueIdentifier,customer.id)
         .input('SymRunDate',sql.DateTime2,customer.SymRunDate)
         .input('ClientNo',sql.NVarChar,customer.ClientNo)
         .input('ClientName',sql.NVarChar,customer.ClientName)
@@ -111,7 +111,7 @@ async function insertCustomer(customer){
         .input('Note',sql.NVarChar,customer.Note)
         .input('ExtraProperties',sql.NVarChar,customer.ExtraProperties) //40
         .input('ConcurrencyStamp',sql.NVarChar,customer.ConcurrencyStamp)
-        .input('CreationTime',sql.DateTime2,customer.CreationTime)
+        // .input('CreationTime',sql.DateTime2,customer.CreationTime)
         .input('CreatorId',sql.UniqueIdentifier,customer.CreatorId)
         .input('LastModificationTime',sql.DateTime2,customer.LastModificationTime)
         .input('LastModifierId',sql.UniqueIdentifier,customer.LastModifierId)
@@ -131,7 +131,7 @@ async function insertInteraction(interaction){
     try{
         let pool = await sql.connect(config);
         let interactionConnect= await pool.request()
-        .input('id',sql.UniqueIdentifier,interaction.id)
+        // .input('id',sql.UniqueIdentifier,interaction.id)
         .input('CustomerId',sql.UniqueIdentifier,interaction.CustomerId)
         .input('IncidentId',sql.UniqueIdentifier,interaction.IncidentId)
         .input('WorkcodeLevel2Id',sql.UniqueIdentifier,interaction.WorkcodeLevel2Id)
@@ -140,7 +140,7 @@ async function insertInteraction(interaction){
         .input('ReceiverChannel',sql.Int,interaction.ReceiverChannel)
         .input('ExtraProperties',sql.NVarChar,interaction.ExtraProperties)
         .input('ConcurrencyStamp',sql.NVarChar,interaction.ConcurrencyStamp)
-        .input('CreationTime',sql.DateTime2,interaction.CreationTime)
+        // .input('CreationTime',sql.DateTime2,interaction.CreationTime)
         .input('CreatorId',sql.UniqueIdentifier,interaction.CreatorId)
         .input('LastModificationTime',sql.DateTime2,interaction.LastModificationTime)
         .input('LastModifierId',sql.UniqueIdentifier,interaction.LastModifierId)
@@ -155,7 +155,7 @@ async function insertInteraction(interaction){
         .input('ProcessingTime',sql.Int,interaction.ProcessingTime)
         .input('IsCms',sql.Bit,interaction.IsCms)
         .input('Talktime',sql.Int,interaction.Talktime)
-        .execute('insertInteraction')
+        .execute('addNewInteraction')
         console.log(interactionConnect)
         return interactionConnect.recordsets;
     }

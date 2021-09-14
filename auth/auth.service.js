@@ -39,14 +39,15 @@ async function authentication (req, res, next) {
       res.status(401).send("Unauthenticated!");
     }
     const data = await jwt.verify(token, config.secretKey);
-    if (!data) {
-      res.status(401).send("Unauthenticated!");
-    }
     if (data) {
       if (data.exp <= Date.now() / 1000) {
         res.status(401).send("Token expired!");
       }
     }
+    if (!data) {
+      res.status(401).send("Unauthenticated!");
+    }
+
     req.user = data;
     next();
   } catch (err) {

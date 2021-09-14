@@ -102,16 +102,7 @@ router.route("/UpdateAgentStatusById/:agentId").get((request, response) => {
     })
 })
 
-var port = process.env.PORT || 8090;
+var port = process.env.PORT || 8091;
 app.listen(port);
 console.log(`running at port ${port}`)
 
-// const sslServer = https.createServer({
-//     key:fs.readFileSync(path.join(__dirname,'cert','key.pem')),
-//     cert:fs.readFileSync(path.join(__dirname,'cert','cert.pem'))
-// },app)
-
-// const port =process.env.PORT || 8090;
-// sslServer.listen(port,()=>{
-//     console.log(`rocket ${port}`)
-// })  
