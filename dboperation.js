@@ -42,18 +42,7 @@ async function simpleReturnCusorUseID(sudoXid){
     }
 }
 
-async function getCustomers(){
-    try{
-        let pool = await sql.connect(config);
-        let products = await pool.request().query("select * from AppCustomers");
-        return products.recordsets;
-    }
-    catch (error){
-        console.log("mm"+ error);
-    }
-}
-
-async function getCustomer(customerID){
+async function getCustomer1ById(customerID){
     try{
         let pool = await sql.connect(config);
         let customer = await pool.request()
@@ -165,7 +154,7 @@ async function insertInteraction(interaction){
 }
 
 
-async function getAgents(){
+async function GetAllAgents(){
     try{
         let pool = await sql.connect(config);
         let customer = await pool.request().query("select * from AppAgentSelecteds")
@@ -204,15 +193,10 @@ async function updateStatusAgentById(agentId){
 
 module.exports={
     getOrders:getOrders,
-
-    getCustomer: getCustomer,
-    getCustomers:getCustomers,
-    simpleInsert:simpleInsert,
-
-    simpleReturnCusorUseID:simpleReturnCusorUseID,
+    getCustomer1ById: getCustomer1ById,
     insertCustomer:insertCustomer,
     insertInteraction:insertInteraction,
-    getAgents:getAgents,
+    GetAllAgents:GetAllAgents,
     getAllCustomers:getAllCustomers,
     updateStatusAgentById:updateStatusAgentById
 }

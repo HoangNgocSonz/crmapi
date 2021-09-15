@@ -58,13 +58,6 @@ router.route("/sudox/:personID").get((request, response) => {
         response.json(result);
     })
 })
-router.route("/customerNoControl").get((request, response) => {
-    dboperation.getCustomers().then(result => {
-        response.json(result[0]);
-    })
-})
-
-
 
 router.route("/GetCustomerByCode/:id").get((request, response) => {
     dboperation.getCustomer(request.params.id).then(result => {

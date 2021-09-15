@@ -46,28 +46,9 @@ router.use((request, response, next) => {
 
 
 
-router.route("/sudox").post((request, response) => {
-    let order = { ...request.body }
-    dboperation.simpleInsert(order).then(result => {
-        response.status(201).json(result)
-    })
-})
-router.route("/sudox/:personID").get((request, response) => {
-    dboperation.simpleReturnCusorUseID(request.params.personID).then(result => {
-        console.log(result);
-        response.json(result);
-    })
-})
-router.route("/customerNoControl").get((request, response) => {
-    dboperation.getCustomers().then(result => {
-        response.json(result[0]);
-    })
-})
-
-
 
 router.route("/GetCustomerByCode/:id").get((request, response) => {
-    dboperation.getCustomer(request.params.id).then(result => {
+    dboperation.getCustomer1ById(request.params.id).then(result => {
         response.json(result);
     })
 })
@@ -87,7 +68,7 @@ router.route("/CreateNewInteaction").post((request, response) => {
 })
 
 router.route("/GetAllAgents").get((request, response) => {
-    dboperation.getAgents().then(result => {
+    dboperation.GetAllAgents().then(result => {
         response.json(result[0]);
     })
 })
