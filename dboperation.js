@@ -13,34 +13,6 @@ async function getOrders(){
     }
 }
 
-async function simpleInsert(person){
-    try{
-        let pool = await sql.connect(config);
-        let insertProducts = await pool.request()
-        .input('PersonId',sql.Int,person.PersonId)
-        .input('LastName',sql.NVarChar,person.LastName)
-        .input('FirstName',sql.NVarChar,person.FirstName)
-        .input('Address',sql.NVarChar,person.Address)
-        .input('City',sql.NVarChar,person.City)
-        .execute('sp_InsertSudox')
-        return insertProducts.recordsets;
-    }
-    catch (error){
-        console.log("mm"+ error);
-    }
-}
-async function simpleReturnCusorUseID(sudoXid){
-    try{
-        let pool = await sql.connect(config);
-        let sudox = await pool.request()
-        .input('PersonID',sql.Int, sudoXid)
-        .execute('testApi1')
-        return sudox.recordsets;
-    }
-    catch (error){
-        console.log("mm"+ error);
-    }
-}
 
 async function getCustomer1ById(customerID){
     try{
@@ -169,8 +141,8 @@ async function GetAllAgents(){
 async function getAllCustomers(){
     try{
         let pool = await sql.connect(config);
-        let customer = await pool.request()
-        .execute('getAllCustomer')
+        let customer = await pool.request().query("select * from AppCustomers1")
+        // .execute('getAllCustomer')
         return customer.recordsets;
     }
     catch (error){
