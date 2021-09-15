@@ -86,12 +86,12 @@ router.route("/CreateNewInteaction").post((request, response) => {
     })
 })
 
-router.route("/GetListAgents").get((request, response) => {
+router.route("/GetAllAgents").get((request, response) => {
     dboperation.getAgents().then(result => {
         response.json(result[0]);
     })
 })
-router.route("/customers").get((request, response) => {
+router.route("/GetAllCustomers").get((request, response) => {
     dboperation.getAllCustomers().then(result => {
         response.json(result);
     })
@@ -105,4 +105,3 @@ router.route("/UpdateAgentStatusById/:agentId").get((request, response) => {
 var port = process.env.PORT || 8091;
 app.listen(port);
 console.log(`running at port ${port}`)
-

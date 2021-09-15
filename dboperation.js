@@ -58,7 +58,7 @@ async function getCustomer(customerID){
         let pool = await sql.connect(config);
         let customer = await pool.request()
         .input('idToFind',sql.UniqueIdentifier, customerID)
-        .execute('getCustomer1')
+        .execute('getCustomer1ById')
         return customer.recordsets;
     }
     catch (error){
