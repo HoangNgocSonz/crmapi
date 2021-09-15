@@ -79,7 +79,7 @@ router.route("/GetAllCustomers").get((request, response) => {
 })
 router.route("/UpdateAgentStatusById/:agentId").get((request, response) => {
     dboperation.updateStatusAgentById(request.params.agentId).then(result => {
-        response.json(result);
+        response.json(result[0][0]);
     })
 })
 
