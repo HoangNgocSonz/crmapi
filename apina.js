@@ -25,7 +25,7 @@ router.route("/orders").get((request, response) => {
 router.route("/login").post(async function (req, res) {
     try {
         const data = await service.login(req.body);
-          res.status(201).send(data);
+          res.status(200).send(data);
     } catch (err) {
         res.status(500).send({
             error: err.message,
@@ -60,9 +60,9 @@ router.route("/GetCustomerByCode/:id").get((request, response) => {
 router.route("/CreateNewCustomer").post((request, response) => {
     let customer = { ...request.body }
     dboperation.insertCustomer(customer).then(result => {
-        // response.status(201).json(result)
-        response.status(201).json({
-            "ret":201,
+        // response.status(200).json(result)
+        response.status(200).json({
+            "ret":200,
             "data": result[0][0],
             "msg":"success"
         });
@@ -71,7 +71,7 @@ router.route("/CreateNewCustomer").post((request, response) => {
 router.route("/CreateNewInteaction").post((request, response) => {
     let interaction = { ...request.body }
     dboperation.insertInteraction(interaction).then(result => {
-        // response.status(201).json(result)
+        // response.status(200).json(result)
         response.status(200).json({
             "ret":200,
             "data": result,
@@ -82,9 +82,9 @@ router.route("/CreateNewInteaction").post((request, response) => {
 router.route("/CreateSession").post((request, response) => {
     let session = { ...request.body }
     dboperation.insertSesion(session).then(result => {
-        // response.status(201).json(result[0][0])
-        response.status(201).json({
-            "ret":201,
+        // response.status(200).json(result[0][0])
+        response.status(200).json({
+            "ret":200,
             "data": result[0],
             "msg":"success"
         });
@@ -102,7 +102,7 @@ router.route("/GetAllAgents").get((request, response) => {
 })
 router.route("/GetAllCustomers").get((request, response) => {
     dboperation.getAllCustomers().then(result => {
-        // response.status(201).json(result[0][0]);
+        // response.status(200).json(result[0][0]);
         response.status(200).json({
             "ret":200,
             "data": result[0],

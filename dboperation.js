@@ -128,8 +128,8 @@ async function insertInteraction(interaction){
 async function insertSesion(sesion){
     try{
         let pool = await sql.connect(config);
-        let sesionConnect= await pool.request()
-        .input('AgentId',sql.UniqueIdentifier,sesion.CustomerId)
+        let sesionConnect= await pool.request();
+        sesionConnect.input('AgentId',sql.UniqueIdentifier,sesion.CustomerId)
         .input('CustomerId',sql.UniqueIdentifier,sesion.CustomerId)
         .execute('createSession')
         return sesionConnect.recordsets;
