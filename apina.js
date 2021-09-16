@@ -112,12 +112,22 @@ router.route("/GetAllCustomers").get((request, response) => {
 })
 router.route("/UpdateAgentStatusById/:agentId").get((request, response) => {
     dboperation.updateStatusAgentById(request.params.agentId).then(result => {
-        // response.json(result[0][0]);
-        response.status(200).json({
-            "ret":200,
-            "data": result[0][0],
-            "msg":"success"
-        });
+        // response.json(result[0][0]);\
+        console.log("result: "+ result[0].length)
+        if(result[0].length>0){
+            response.status(200).json({
+                "ret":200,
+                "data": result[0][0],
+                "msg":"success"
+            });
+        }else{
+            response.status(200).json({
+                "ret":200,
+                "data": result,
+                "msg":"not found"
+            });
+        }
+        
     })
 })
 
