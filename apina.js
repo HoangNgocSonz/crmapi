@@ -25,7 +25,7 @@ router.route("/orders").get((request, response) => {
 router.route("/login").post(async function (req, res) {
     try {
         const data = await service.login(req.body);
-          res.status(200).send(data);
+          res.status(201).send(data);
     } catch (err) {
         res.status(500).send({
             error: err.message,
@@ -49,37 +49,75 @@ router.use((request, response, next) => {
 
 router.route("/GetCustomerByCode/:id").get((request, response) => {
     dboperation.getCustomer1ById(request.params.id).then(result => {
-        response.json(result);
+        // response.json(result);
+        response.status(200).json({
+            "ret":200,
+            "data": result[0][0],
+            "msg":"success"
+        });
     })
 })
 router.route("/CreateNewCustomer").post((request, response) => {
     let customer = { ...request.body }
     dboperation.insertCustomer(customer).then(result => {
-        console.log("success")
-        response.status(201).json(result)
+        // response.status(201).json(result)
+        response.status(201).json({
+            "ret":201,
+            "data": result[0][0],
+            "msg":"success"
+        });
     })
 })
 router.route("/CreateNewInteaction").post((request, response) => {
     let interaction = { ...request.body }
     dboperation.insertInteraction(interaction).then(result => {
-        console.log("success")
-        response.status(201).json(result)
+        // response.status(201).json(result)
+        response.status(200).json({
+            "ret":200,
+            "data": result,
+            "msg":"success"
+        });
     })
 })
-
+router.route("/CreateSession").post((request, response) => {
+    let session = { ...request.body }
+    dboperation.insertSesion(session).then(result => {
+        // response.status(201).json(result[0][0])
+        response.status(201).json({
+            "ret":201,
+            "data": result[0],
+            "msg":"success"
+        });
+    })
+})
 router.route("/GetAllAgents").get((request, response) => {
     dboperation.GetAllAgents().then(result => {
-        response.json(result[0]);
+        // response.json(result[0]);
+        response.status(200).json({
+            "ret":200,
+            "data": result[0],
+            "msg":"success"
+        });
     })
 })
 router.route("/GetAllCustomers").get((request, response) => {
     dboperation.getAllCustomers().then(result => {
-        response.json(result);
+        // response.status(201).json(result[0][0]);
+        response.status(200).json({
+            "ret":200,
+            "data": result[0],
+            "msg":"success"
+        });
     })
 })
 router.route("/UpdateAgentStatusById/:agentId").get((request, response) => {
     dboperation.updateStatusAgentById(request.params.agentId).then(result => {
-        response.json(result[0][0]);
+        // response.json(result[0][0]);
+        response.status(200).json({
+            "ret":200,
+            "data": result[0][0],
+            "msg":"success"
+        });
     })
 })
 

@@ -124,6 +124,20 @@ async function insertInteraction(interaction){
         console.log("mm"+ error);
     }
 }
+async function insertSesion(sesion){
+    try{
+        let pool = await sql.connect(config);
+        let sesionConnect= await pool.request()
+        .input('AgentId',sql.UniqueIdentifier,sesion.CustomerId)
+        .input('CustomerId',sql.UniqueIdentifier,sesion.CustomerId)
+        .execute('createSession')
+        return sesionConnect.recordsets;
+    }
+    catch (error){
+        console.log("mm"+ error);
+    }
+}
+
 
 
 async function GetAllAgents(){
@@ -170,5 +184,6 @@ module.exports={
     insertInteraction:insertInteraction,
     GetAllAgents:GetAllAgents,
     getAllCustomers:getAllCustomers,
-    updateStatusAgentById:updateStatusAgentById
+    updateStatusAgentById:updateStatusAgentById,
+    insertSesion:insertSesion
 }
