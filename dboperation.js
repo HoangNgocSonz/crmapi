@@ -84,6 +84,7 @@ async function insertCustomer(customer){
     }
     catch (error){
         console.log("mm"+ error);
+        return error
     }
 }
 
