@@ -1,6 +1,7 @@
 const dboperation = require('./dboperation');
 const service = require('./auth/auth.service');
 const express = require('express');
+const sessionService = require('./service/session')
 
 const https = require('https');
 const path = require('path');
@@ -74,18 +75,25 @@ router.route("/CreateNewInteaction").post((request, response) => {
         // response.status(200).json(result)
         response.status(200).json({
             "ret":200,
-            "data": result,
+            "data": result[0][0],
             "msg":"success"
         });
     })
 })
 router.route("/CreateSession").post((request, response) => {
     let session = { ...request.body }
-    dboperation.insertSesion(session).then(result => {
+    sessionService.insertSesion(session,response).then(result => {
         // response.status(200).json(result[0][0])
+        if(result.status=="failure"){
+            response.status(result.ret).json({
+                "ret":result.ret,
+                "msg":result.msg
+            });
+        }
+        else
         response.status(200).json({
             "ret":200,
-            "data": result[0],
+            "data": result,
             "msg":"success"
         });
     })
