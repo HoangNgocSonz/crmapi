@@ -37,12 +37,12 @@ app.get("/",(req,res)=>{
     res.send("hello there")
 })
 
-// router.use((request, response, next) => { 
-//     service.authentication(request, response, next)
-// })
 router.use((request, response, next) => { 
-     next(); 
+    service.authentication(request, response, next)
 })
+// router.use((request, response, next) => { 
+//      next(); 
+// })
 
 
 
