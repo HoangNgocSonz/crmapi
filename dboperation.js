@@ -155,7 +155,7 @@ async function updateStatusAgentById(agentId) {
         let pool = await sql.connect(config);
         let customer = await pool.request()
             .input('id', sql.UniqueIdentifier, agentId)
-            .execute('updateStatusAgentById')
+            .execute('updateStatusAgentById1')
         return customer.recordsets;
     }
     catch (error) {
