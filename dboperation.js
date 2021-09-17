@@ -129,7 +129,7 @@ async function insertInteraction(interaction) {
 async function GetAllAgents() {
     try {
         let pool = await sql.connect(config);
-        let customer = await pool.request().query("select * from AppAgentSelecteds")
+        let customer = await pool.request().query("select * from AppAgentSelecteds where Status = 0")
         // .execute('getAppAgentSelecteds')
         return customer.recordsets;
     }
