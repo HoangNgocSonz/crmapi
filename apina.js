@@ -28,8 +28,10 @@ router.route("/login").post(async function (req, res) {
         const data = await service.login(req.body);
           res.status(200).send(data);
     } catch (err) {
-        res.status(500).send({
-            error: err.message,
+        res.status(400).send({
+            ret:"400",
+            data:null,
+            msg: err.message,
         })
     }
 })
@@ -87,13 +89,14 @@ router.route("/CreateSession").post((request, response) => {
         if(result.status=="failure"){
             response.status(result.ret).json({
                 "ret":result.ret,
+                "data":null,
                 "msg":result.msg
             });
         }
         else
         response.status(200).json({
             "ret":200,
-            "data": result,
+            "data": result[0][0],
             "msg":"success"
         });
     })

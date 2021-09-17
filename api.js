@@ -96,7 +96,7 @@ router.route("/CreateSession").post((request, response) => {
         else
         response.status(200).json({
             "ret":200,
-            "data": result,
+            "data": result[0][0],
             "msg":"success"
         });
     })
