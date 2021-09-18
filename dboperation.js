@@ -154,15 +154,14 @@ async function updateStatusAgentById(agentId) {
     try {
         let pool = await sql.connect(config);
         let customer = await pool.request()
-            .input('id', sql.UniqueIdentifier, agentId)
-            .execute('updateStatusAgentById1')
+            .input('AgentId', sql.UniqueIdentifier, agentId)
+            .execute('updateStatusAgentByAgentId')
         return customer.recordsets;
     }
     catch (error) {
         console.log("mm" + error);
     }
 }
-
 module.exports = {
     getOrders: getOrders,
     getCustomer1ById: getCustomer1ById,

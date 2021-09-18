@@ -1,5 +1,6 @@
 var config = require('../dbconfig');
 const sql = require('mssql');
+const axios = require('axios');
 
 
 async function insertSesion(session) {
@@ -31,6 +32,19 @@ async function insertSesion(session) {
     //if session not exists then create session
     if (SessionExist.recordsets[0].length == 0) {
         try {
+            //update status agent from free to busy
+            axios.get(`http://10.1.5.68:8091/api/UpdateAgentStatusById/${session.AgentId}`)
+            .then(function (response) {
+              // handle success
+              console.log("mmm: "+response);
+            })
+            .catch(function (error) {
+              // handle error
+              console.log("errrr:" + error);
+            })
+            .then(function () {
+              // always executed
+            });
             let sesionConnect = await pool.request()
                 .input('AgentId', sql.UniqueIdentifier, session.AgentId)
                 .input('CustomerId', sql.UniqueIdentifier, session.CustomerId)

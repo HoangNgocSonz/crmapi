@@ -23,7 +23,7 @@ async function login(data) {
       password: existedUser.password,
     };
     const token = await jwt.sign(tokenData, config.secretKey, {
-      expiresIn: '2h',
+      expiresIn: '2d',
     });
     return token;
   } else {
