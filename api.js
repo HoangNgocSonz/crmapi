@@ -23,7 +23,7 @@ router.route("/orders").get((request, response) => {
     })
 })
 
-router.route("/login").post(async function (req, res) {
+router.route("/loginx").post(async function (req, res) {
     try {
         const data = await service.login(req.body);
           res.status(200).send(data);
