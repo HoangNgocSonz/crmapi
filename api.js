@@ -23,7 +23,7 @@ router.route("/orders").get((request, response) => {
     })
 })
 
-router.route("/loginx").post(async function (req, res) {
+router.route("/login").post(async function (req, res) {
     try {
         const data = await service.login(req.body);
           res.status(200).send(data);
@@ -36,7 +36,7 @@ router.route("/loginx").post(async function (req, res) {
     }
 })
 
-router.route("/UpdateAgentStatusById/:agentId").post((request, response) => {
+router.route("/UpdateAgentStatusById/:agentId").get((request, response) => {
     dboperation.updateStatusAgentById(request.params.agentId).then(result => {
         // response.json(result[0][0]);\
         console.log("result: "+ result[0].length)

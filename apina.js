@@ -36,7 +36,7 @@ router.route("/login").post(async function (req, res) {
     }
 })
 
-router.route("/UpdateAgentStatusById/:agentId").post((request, response) => {
+router.route("/UpdateAgentStatusById/:agentId").get((request, response) => {
     dboperation.updateStatusAgentById(request.params.agentId).then(result => {
         // response.json(result[0][0]);\
         console.log("result: "+ result[0].length)
