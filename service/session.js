@@ -33,7 +33,7 @@ async function insertSesion(session) {
     if (SessionExist.recordsets[0].length == 0) {
         try {
             //update status agent from free to busy
-            axios.get(`http://10.1.5.68:8091/api/UpdateAgentStatusById/${session.AgentId}`)
+            axios.post(`http://10.1.5.68:8091/api/UpdateAgentStatusById/${session.AgentId}`)
             .then(function (response) {
               // handle success
               console.log("mmm: "+response);
