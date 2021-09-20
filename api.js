@@ -81,6 +81,21 @@ router.route("/GetCustomerByCode/:id").get((request, response) => {
         });
     })
 })
+
+
+router.route("/checkExistingSession").post((request, response) => {
+    let data = { ...request.body }
+    sessionService.checkExistingSession(data).then(result => {
+        if(result[0].length>0){
+            response.status(200).json('Session is existing')
+        }
+        else
+        response.status(200).json('Session does not exist')
+        
+    })
+})
+
+
 router.route("/CreateNewCustomer").post((request, response) => {
     let customer = { ...request.body }
     dboperation.insertCustomer(customer).then(result => {

@@ -25,9 +25,9 @@ async function insertSesion(session) {
     }
     //check session exists
     let SessionExist = await pool.request()
-        .input('AgentId', sql.UniqueIdentifier, session.AgentId)
-        .input('CustomerId', sql.UniqueIdentifier, session.CustomerId)
-        .execute('checkAgentAndCustomerIdBusy')
+        // .input('AgentId', sql.UniqueIdentifier, session.AgentId)
+        .input('CustomerId', sql.NVarChar, session.CustomerId)
+        .execute('checkExistingSession')
 
     //if session not exists then create session
     if (SessionExist.recordsets[0].length == 0) {
@@ -47,7 +47,7 @@ async function insertSesion(session) {
             });
             let sesionConnect = await pool.request()
                 .input('AgentId', sql.UniqueIdentifier, session.AgentId)
-                .input('CustomerId', sql.UniqueIdentifier, session.CustomerId)
+                .input('CustomerId', sql.NVarChar, session.CustomerId)
                 .execute('createSession')
             return (sesionConnect.recordsets);
         }
@@ -65,7 +65,22 @@ async function insertSesion(session) {
     }
 }
 
+async function checkExistingSession(data) {
+    try {
+        let pool = await sql.connect(config);
+        let insertProducts = await pool.request()
+            .input('CustomerId', sql.NVarChar, data.CustomerId)
+            .execute('checkExistingSession')
+        return insertProducts.recordsets;
+    }
+    catch (error) {
+        console.log("mm" + error);
+        return error
+    }
+}
+
 
 module.exports = {
-    insertSesion: insertSesion
+    insertSesion: insertSesion,
+    checkExistingSession:checkExistingSession
 }
