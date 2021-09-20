@@ -87,10 +87,18 @@ router.route("/checkExistingSession").post((request, response) => {
     let data = { ...request.body }
     sessionService.checkExistingSession(data).then(result => {
         if(result[0].length>0){
-            response.status(200).json('Session is existing')
+            response.status(200).json({
+                "ret":200,
+                "msg":"Session is existing",
+                "result":1
+            })
         }
         else
-        response.status(200).json('Session does not exist')
+        response.status(200).json({
+            "ret":200,
+            "msg":"Session does not exist",
+            "result":0
+        })
         
     })
 })
