@@ -8,6 +8,17 @@ async function SearchTicketByCusId(data) {
         let ticket = await pool.request()
         .input('CustomerId', sql.UniqueIdentifier, data.CustomerId)
         .execute('searchTicketByCusId')
+    console.log("length" + ticket.recordsets[0].length)
+    //if customerId does not exist 
+    if (ticket.recordsets[0].length == '0') {
+        return ({
+            ret: 400,
+            status: "failure",
+            msg: "CustomerId does not exist"
+        })
+    }
+    else
+    // console.log(ticket.recordsets)
     return ticket.recordsets;
     }
     catch (error) {

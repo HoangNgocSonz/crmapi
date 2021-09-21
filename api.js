@@ -94,12 +94,15 @@ router.route("/checkExistingSession").post((request, response) => {
                 "result":1
             })
         }
-        else
-        response.status(200).json({
-            "ret":200,
-            "msg":"Session does not exist",
-            "result":0
-        })
+        else{
+            
+            response.status(200).json({
+                "ret":200,
+                "msg":"Session does not exist",
+                "result":0
+            })
+        }
+        
         
     })
 })
@@ -120,7 +123,15 @@ router.route("/CreateNewCustomer").post((request, response) => {
 router.route("/SearchTicketByCusId").post((request, response) => {
     let data = { ...request.body }
     ticketService.SearchTicketByCusId(data).then(result => {
-        // response.status(200).json(result)
+        console.log("result :" + result)
+        if(result.status=="failure"){
+            response.status(result.ret).json({
+                "ret":result.ret,
+                "data":null,
+                "msg":result.msg
+            });
+        }
+        else
         response.status(200).json({
             "ret":200,
             "data": result[0][0],
@@ -144,6 +155,7 @@ router.route("/CreateSession").post((request, response) => {
     let session = { ...request.body }
     sessionService.insertSesion(session,response).then(result => {
         // response.status(200).json(result[0][0])
+        console.log(result)
         if(result.status=="failure"){
             response.status(result.ret).json({
                 "ret":result.ret,
@@ -152,11 +164,14 @@ router.route("/CreateSession").post((request, response) => {
             });
         }
         else
-        response.status(200).json({
-            "ret":200,
-            "data": result[0][0],
-            "msg":"success"
-        });
+        {
+            response.status(200).json({
+                "ret":200,
+                "data": result[0][0],
+                "msg":"success"
+            });
+        }
+
     })
 })
 router.route("/GetAllAgents").get((request, response) => {

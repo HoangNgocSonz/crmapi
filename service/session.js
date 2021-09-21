@@ -36,7 +36,7 @@ async function insertSesion(session) {
             axios.get(`http://10.1.5.68:8091/api/UpdateAgentStatusById/${session.AgentId}`)
             .then(function (response) {
               // handle success
-              console.log("mmm: "+response);
+              //console.log("mmm: "+response);
             })
             .catch(function (error) {
               // handle error
@@ -45,6 +45,7 @@ async function insertSesion(session) {
             .then(function () {
               // always executed
             });
+            //create new session
             let sesionConnect = await pool.request()
                 .input('AgentId', sql.UniqueIdentifier, session.AgentId)
                 .input('CustomerId', sql.NVarChar, session.CustomerId)
@@ -71,6 +72,7 @@ async function checkExistingSession(data) {
         let insertProducts = await pool.request()
             .input('CustomerId', sql.NVarChar, data.CustomerId)
             .execute('checkExistingSession')
+       
         return insertProducts.recordsets;
     }
     catch (error) {
