@@ -1,7 +1,8 @@
 const dboperation = require('./dboperation');
 const service = require('./auth/auth.service');
 const express = require('express');
-const sessionService = require('./service/session')
+const sessionService = require('./service/session');
+const ticketService = require('./service/ticket')
 
 const https = require('https');
 const path = require('path');
@@ -115,6 +116,19 @@ router.route("/CreateNewCustomer").post((request, response) => {
         });
     })
 })
+
+router.route("/SearchTicketByCusId").post((request, response) => {
+    let data = { ...request.body }
+    ticketService.SearchTicketByCusId(data).then(result => {
+        // response.status(200).json(result)
+        response.status(200).json({
+            "ret":200,
+            "data": result[0][0],
+            "msg":"success"
+        });
+    })
+})
+
 router.route("/CreateNewInteaction").post((request, response) => {
     let interaction = { ...request.body }
     dboperation.insertInteraction(interaction).then(result => {
@@ -168,4 +182,4 @@ router.route("/GetAllCustomers").get((request, response) => {
 
 var port = process.env.PORT || 8091;
 app.listen(port);
-console.log(`running at port ${port}`)
+console.log(`running at port ${port}`);
